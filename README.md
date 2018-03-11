@@ -42,3 +42,26 @@ Output should resemble:
       should compile into a catalogue without dependency cycles
       should contain Class[hiera_lookups::one]
       should contain Class[hiera_lookups::two]
+
+    includes
+      without the KEYNAME environment variable
+        should contain Class[hiera_lookups::one]
+      when KEYNAME is set to "other_classes"
+        should contain Class[hiera_lookups::two]
+
+    keyname fact
+      returns the value of Foo::Keyname
+
+    Foo::Keyname
+      when KEYNAME is unset
+        returns "classes"
+      when KEYNAME is set
+        with a valid (good) value
+          returns the correct value in lower case
+        with an invalid (bad) value
+          returns "unrecognized"
+        with an empty (bad) value
+          returns "unrecognized"
+
+    Finished in 2.53 seconds (files took 2.14 seconds to load)
+    22 examples, 0 failures

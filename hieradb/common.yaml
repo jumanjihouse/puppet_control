@@ -2,3 +2,9 @@
 
 lookup_1: 'foo'
 lookup_2: 'bar'
+
+classes:
+  - 'hiera_lookups::one'
+
+other_classes:
+  - 'hiera_lookups::two'
