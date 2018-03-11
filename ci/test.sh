@@ -7,7 +7,7 @@ set -o pipefail
 ################################################################################
 
 # Ensure dependencies are up-to-date.
-. ci/bootstrap
+. ci/bootstrap.sh
 
 # Run various checks unrelated to Puppet.
 echo '---> pre-commit'
