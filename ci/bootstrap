@@ -7,6 +7,7 @@ set -o pipefail
 ################################################################################
 
 main() {
+  install_precommit
   install_gems
   install_puppet_modules
 }
@@ -20,6 +21,16 @@ finish() {
   else
     echo "[ERROR] $0" >&2
   fi
+}
+
+install_precommit() {
+  echo '---> pre-commit'
+  if ! command -v pre-commit &> /dev/null; then
+    # Install for just this user. Does not need root.
+    pip install --user -Iv --compile --no-cache-dir pre-commit
+  fi
+
+  pre-commit autoupdate
 }
 
 install_gems() {
