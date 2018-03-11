@@ -1,3 +1,7 @@
 *~
 *.swp
 modules/
+.bundle/
+bin/
+Gemfile.lock
+spec/fixtures/site.pp

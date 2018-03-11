@@ -1,0 +1,39 @@
+#!/bin/bash
+set -eEu
+set -o pipefail
+
+################################################################################
+# Run "ci/bootstrap" to install dependencies for the test harness.
+################################################################################
+
+main() {
+  install_gems
+  install_puppet_modules
+}
+
+trap finish EXIT
+
+finish() {
+  declare -ri RC=$?
+  if [[ ${RC} -eq 0 ]]; then
+    echo "$0 OK" >&2
+  else
+    echo "[ERROR] $0" >&2
+  fi
+}
+
+install_gems() {
+  echo '---> Install ruby gems'
+  readonly LOCAL_BIN_PATH="${PWD}/bin"
+  bundle install --path=~/.bundle --binstubs="${LOCAL_BIN_PATH}"
+  if ! [[ "${PATH}" =~ ${LOCAL_BIN_PATH} ]]; then
+    export PATH="${LOCAL_BIN_PATH}:${PATH}"
+  fi
+}
+
+install_puppet_modules() {
+  echo '---> Install dependent puppet modules'
+  bundle exec r10k puppetfile install -v
+}
+
+main
