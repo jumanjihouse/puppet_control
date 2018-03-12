@@ -10,16 +10,7 @@ set -o pipefail
 . ci/bootstrap.sh
 
 # Run various checks unrelated to Puppet.
-echo '---> pre-commit'
-# http://pre-commit.com/#pre-commit-run
-readonly DEFAULT_PRECOMMIT_OPTS="--all-files --verbose"
-# Allow user to override our defaults by setting an env var.
-readonly PRECOMMIT_OPTS="${PRECOMMIT_OPTS:-$DEFAULT_PRECOMMIT_OPTS}"
-if ! command -v pre-commit &> /dev/null; then
-  ci/bootstrap -v "${VERBOSITY}"
-fi
-# shellcheck disable=SC2086
-pre-commit run ${PRECOMMIT_OPTS}
+run_precommit
 
 # Check for whitespace errors.
 check_whitespace

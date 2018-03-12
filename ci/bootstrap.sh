@@ -33,6 +33,19 @@ install_precommit() {
   pre-commit autoupdate
 }
 
+run_precommit() {
+  echo '---> pre-commit'
+
+  # http://pre-commit.com/#pre-commit-run
+  readonly DEFAULT_PRECOMMIT_OPTS="--all-files --verbose"
+
+  # Allow user to override our defaults by setting an env var.
+  readonly PRECOMMIT_OPTS="${PRECOMMIT_OPTS:-$DEFAULT_PRECOMMIT_OPTS}"
+
+  # shellcheck disable=SC2086
+  pre-commit run ${PRECOMMIT_OPTS}
+}
+
 install_gems() {
   echo '---> Install ruby gems'
   readonly LOCAL_BIN_PATH="${PWD}/bin"
