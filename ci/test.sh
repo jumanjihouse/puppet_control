@@ -21,6 +21,9 @@ fi
 # shellcheck disable=SC2086
 pre-commit run ${PRECOMMIT_OPTS}
 
+# Check for whitespace errors.
+check_whitespace
+
 # Syntax check Hiera config files.
 rake syntax:hiera
 
