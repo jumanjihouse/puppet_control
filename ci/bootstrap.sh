@@ -25,6 +25,14 @@ finish() {
 
 install_precommit() {
   echo '---> pre-commit'
+
+  python_path="$(python -c "import site; print(site.USER_BASE)")"
+  readonly python_path
+
+  if ! grep -q "${python_path}/bin" <(env | grep PATH); then
+    export PATH="${PATH}:${python_path}/bin"
+  fi
+
   if ! command -v pre-commit &> /dev/null; then
     # Install for just this user. Does not need root.
     pip install --user -Iv --compile --no-cache-dir pre-commit
