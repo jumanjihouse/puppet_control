@@ -8,7 +8,7 @@ This is a demo Puppet Control repo with a test harness.
 
 On a Linux host with a modern version of Ruby:
 
-    ci/test
+    ci/test.sh
 
 Output should resemble:
 
