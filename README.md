@@ -2,6 +2,9 @@
 
 This is a demo Puppet Control repo with a test harness.
 
+[![CircleCI](https://circleci.com/gh/jumanjihouse/puppet_control/tree/master.svg?style=svg&circle-token=6080427debe2a54398f084208f67642d1b5b9b08)](https://circleci.com/gh/jumanjihouse/puppet_control/tree/master 'View CI builds')
+
+
 ## How to
 
 ### Run the test harness
