@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
+################################################################################
+# For now limit Puppet <= 5.3.3
+#
+# See https://github.com/dylanratcliffe/onceover/issues/153
+# for simplist explanation.
+#
+# See also: https://tickets.puppetlabs.com/browse/MODULES-6598
+################################################################################
+
 # Core gems for the test harness.
 gem 'json', '2.1.0'
 gem 'metadata-json-lint', '2.1.0'
