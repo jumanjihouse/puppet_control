@@ -12,9 +12,6 @@ set -o pipefail
 # Run various checks unrelated to Puppet.
 run_precommit
 
-# Check for whitespace errors.
-check_whitespace
-
 # Syntax check Hiera config files.
 rake syntax:hiera
 
