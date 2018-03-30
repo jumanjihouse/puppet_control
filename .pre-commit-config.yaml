@@ -33,3 +33,14 @@ repos:
     hooks:
       - id: forbid-crlf
       - id: forbid-tabs
+
+  - repo: https://github.com/chriskuehl/puppet-pre-commit-hooks.git
+    sha: v2.0.1
+    hooks:
+      - id: puppet-validate
+      - id: erb-validate
+      - id: epp-validate
+      - id: puppet-lint
+        args:
+          - --fail-on-warnings
+          - --no-documentation-check

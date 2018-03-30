@@ -4,15 +4,15 @@ class hiera_lookups::one() {
   # since we don't provide a default value.
   $lookup_1 = lookup('lookup_1', String)
 
-  if empty("${lookup_1}") {
+  if empty($lookup_1) {
     # This code never gets executed because
     # the catalog compile fails if the lookup fails.
     # Puppet raises
-    fail("lookup_1 was not found in hiera.")
+    fail('lookup_1 was not found in hiera.')
   }
 
-  user { user1:
+  user { 'user1':
     ensure   => present,
-    password => "${lookup_1}",
+    password => $lookup_1,
   }
 }
