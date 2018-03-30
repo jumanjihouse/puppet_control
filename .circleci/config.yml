@@ -17,9 +17,9 @@ jobs:
       - run:
           name: Bootstrap the local environment
           command: |
-            ci/bootstrap.sh
+            ci/bootstrap
 
       - run:
           name: Test the image
           command: |
-            ci/test.sh
+            ci/test
