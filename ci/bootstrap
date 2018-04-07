@@ -37,6 +37,11 @@ install_precommit() {
     # Install for just this user. Does not need root.
     pip install --user -Iv --compile --no-cache-dir pre-commit
   fi
+
+  # Install hook environments now. Otherwise, they get
+  # installed when first invoked, and the time to install
+  # artificially skews the time reported for the test run.
+  pre-commit install-hooks
 }
 
 run_precommit() {
