@@ -1,4 +1,6 @@
 ---
+require: rubocop-rspec
+
 AllCops:
   Exclude:
     - 'modules/**/*'  # Modules are sync'd from outside repo by r10k
