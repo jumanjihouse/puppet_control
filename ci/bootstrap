@@ -14,6 +14,14 @@ main() {
 
 trap finish EXIT
 
+export TIME='
+%C
+Elapsed wall clock time:    %E
+CPU seconds in kernel mode: %S
+CPU seconds in user mode:   %S
+Max RSS in KiB:             %M
+'
+
 finish() {
   declare -ri RC=$?
   if [[ ${RC} -eq 0 ]]; then
@@ -35,13 +43,13 @@ install_precommit() {
 
   if ! command -v pre-commit &>/dev/null; then
     # Install for just this user. Does not need root.
-    pip install --user -Iv --compile --no-cache-dir pre-commit
+    /usr/bin/time pip install --user -Iv --compile --no-cache-dir pre-commit
   fi
 
   # Install hook environments now. Otherwise, they get
   # installed when first invoked, and the time to install
   # artificially skews the time reported for the test run.
-  pre-commit install-hooks
+  /usr/bin/time pre-commit install-hooks
 }
 
 run_precommit() {
@@ -54,13 +62,13 @@ run_precommit() {
   readonly PRECOMMIT_OPTS="${PRECOMMIT_OPTS:-$DEFAULT_PRECOMMIT_OPTS}"
 
   # shellcheck disable=SC2086
-  pre-commit run ${PRECOMMIT_OPTS}
+  /usr/bin/time pre-commit run ${PRECOMMIT_OPTS}
 }
 
 install_gems() {
   echo '---> Install ruby gems'
   readonly LOCAL_BIN_PATH="${PWD}/bin"
-  bundle install --path=~/.bundle --binstubs="${LOCAL_BIN_PATH}"
+  /usr/bin/time bundle install --path=~/.bundle --binstubs="${LOCAL_BIN_PATH}"
   if ! [[ "${PATH}" =~ ${LOCAL_BIN_PATH} ]]; then
     export PATH="${LOCAL_BIN_PATH}:${PATH}"
   fi
@@ -68,7 +76,7 @@ install_gems() {
 
 install_puppet_modules() {
   echo '---> Install dependent puppet modules'
-  bundle exec r10k puppetfile install -v
+  /usr/bin/time bundle exec r10k puppetfile install -v
 }
 
 main

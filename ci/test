@@ -13,24 +13,24 @@ set -o pipefail
 run_precommit
 
 # Syntax check Hiera config files.
-rake syntax:hiera
+/usr/bin/time rake syntax:hiera
 
 # Syntax check Puppet manifests.
-rake syntax:manifests
+/usr/bin/time rake syntax:manifests
 
 # Syntax check Puppet templates.
-rake syntax:templates
+/usr/bin/time rake syntax:templates
 
 # In-module hiera data depends on having a correct metadata.json file.
 # It is strongly recommended to use metadata-json-lint to
 # automatically check metadata.json file before running rspec.
 echo '---> metadata_lint'
-rake metadata_lint
+/usr/bin/time rake metadata_lint
 
 # Check ruby code, including rspec, for style.
 echo '---> rubocop'
-rake rubocop
+/usr/bin/time rake rubocop
 
 # Run spec tests.
 echo '---> spec'
-rake spec
+/usr/bin/time rake spec
