@@ -19,6 +19,12 @@ RSpec.configure do |c|
   c.fail_fast = false
   c.setup_fixtures = false
 
+  # Enable aggregation of expects.
+  # https://relishapp.com/rspec/rspec-core/docs/expectation-framework-integration/aggregating-failures
+  c.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true
+  end
+
   c.module_path = [
     File.join(repo_root, 'site'),
     File.join(repo_root, 'modules'),
