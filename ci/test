@@ -27,10 +27,6 @@ run_precommit
 echo '---> metadata_lint'
 /usr/bin/time rake metadata_lint
 
-# Check ruby code, including rspec, for style.
-echo '---> rubocop'
-/usr/bin/time rake rubocop
-
 # Run spec tests.
 echo '---> spec'
 /usr/bin/time rake spec

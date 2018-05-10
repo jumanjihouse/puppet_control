@@ -11,6 +11,7 @@ repos:
       - id: forbid-binary
       - id: git-check  # Configure in .gitattributes
       - id: git-dirty  # Configure in .gitignore
+      - id: rubocop
       - id: shellcheck
       - id: shfmt
 
